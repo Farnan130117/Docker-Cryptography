@@ -1,0 +1,43 @@
+Step 1: 
+Creating index.php file under src folder
+
+Inside index.php:
+
+<?php
+     //  /src/index.php
+    //echo "Hello there";
+    echo "PHP_Version :".phpversion();
+?>
+
+And
+
+Create Dockerfile outside src folder
+
+Inside Dockerfile:
+
+FROM php:7.4.1-apache
+COPY src/ /var/www/html/
+EXPOSE 80
+
+
+Step 2:
+
+To create docker image
+docker build -t php-demo ./ 
+
+To run the project inside using docker
+
+docker run -i --rm --name <container name> -v <Project Path>:/var/www/html -p 80:80 <image name>
+
+docker run -i --rm --name php_cont -v E:\kcsl\4px\dockertest\src\:/var/www/html -p 80:80 php_demo
+
+Type just localhost in the browser, where it shows the php version of apache server which is installed inside docker container.
+
+We also can run the php file under the src folder using the previously local apache  server.
+
+For that:
+
+<path of the src folder   >php -S 127.0.0.1:8000
+E:\KCSL\4px\DockerTest\src>php -S 127.0.0.1:8000
+
+Type http://127.0.0.1:8000/ in your browser, Showing host pc’s previously installed php version of apache server.
